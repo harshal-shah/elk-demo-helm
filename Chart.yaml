@@ -1,0 +1,8 @@
+description: Log analysis demo using fluentd-elasticsearch-kibana
+maintainers:
+- email: harshal@infracloud.io
+  name: Harshal Shah
+name: elk-demo-helm
+sources:
+- https://github.com/jenkinsci/docker-jnlp-slave
+version: 0.0.1

@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: elasticsearch
+spec:
+  replicas: {{ .Values.elasticsearch.replicas }}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: elasticsearch
+    spec:
+      containers:
+      - env:
+        - name: ES_JAVA_OPTS
+          value: -Xmx{{ .Values.elasticsearch.xmx }} -Xms{{ .Values.elasticsearch.xms }}
+        image: {{ .Values.elasticsearch.image_name }}
+        name: elasticsearch
+        ports:
+        - containerPort: 9200
+        resources: {}
+      restartPolicy: Always

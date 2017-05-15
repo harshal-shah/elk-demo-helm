@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: kibana
+spec:
+  replicas: {{ .Values.kibana.replicas }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: kibana
+    spec:
+      containers:
+      - image: {{ .Values.kibana.image_name }}
+        name: kibana
+        ports:
+        - containerPort: 5601
+        resources: {}
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    name: kibana
+  name: kibana
+spec:
+  ports:
+  - name: "5601"
+    port: 5601
+    targetPort: 5601
+    nodePort: {{ .Values.kibana.node_port }}
+  selector:
+    name: kibana
+  type: NodePort

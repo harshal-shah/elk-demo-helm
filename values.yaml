@@ -1,0 +1,11 @@
+elasticsearch:
+  replicas: 1
+  xmx: 256m
+  xms: 256m
+  image_name: "komljen/elasticsearch"
+fluentd:
+  image_name: "quay.io/fluent/fluentd-kubernetes-daemonset"
+kibana:
+  replicas: 1
+  image_name: "komljen/kibana"
+  node_port: 30000
